@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import styles from "./FriendList.module.scss";
 
 const FriendList = ({ friends }) => (
@@ -19,3 +19,17 @@ const FriendList = ({ friends }) => (
 );
 
 export default FriendList;
+
+FriendList.defaultProps = {
+  friends: [],
+};
+
+FriendList.propTypes = {
+  friends: PropTypes.arrayOf(
+    PropTypes.shape({
+      avatar: PropTypes.string,
+      name: PropTypes.string,
+      isOnline: PropTypes.bool,
+    })
+  ),
+};

@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import styles from "./Transactions.module.scss";
 
 const TransactionHistory = ({ items }) => (
@@ -13,7 +13,7 @@ const TransactionHistory = ({ items }) => (
     </thead>
 
     <tbody>
-      {items.map(({ id, type, amount, currency }) => (
+      {items.map(({ id, type, amount, currency = "UAH" }) => (
         <tr key={id} className={styles.item}>
           <td>{type}</td>
           <td>{amount}</td>
@@ -25,3 +25,17 @@ const TransactionHistory = ({ items }) => (
 );
 
 export default TransactionHistory;
+
+TransactionHistory.defaultProps = {
+  items: [],
+};
+
+TransactionHistory.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      amount: PropTypes.number,
+      currency: PropTypes.string.isRequired,
+    })
+  ),
+};
